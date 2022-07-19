@@ -18,7 +18,7 @@ function buildElement(tag, style){
 
 function buildStyledElement(tag, props, strings, ...values) { 
   const style = strings.reduce((res, str, i) => {  
-                  return res + (str.includes('@media') ? document.styleSheets[0].insertRule(str) : str) + (values[i] ? values[i](props || {}) : "");  // props: { theme, backcolor }
+                  return res + (str.includes('@media') && document.styleSheets[0] ? document.styleSheets[0].insertRule(str) : str) + (values[i] ? values[i](props || {}) : "");  // props: { theme, backcolor }
                 }, "");
   
   return buildElement(tag, style)
